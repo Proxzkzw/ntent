@@ -1,0 +1,49 @@
+{
+  "name": "ntent",
+  "displayName": "Ntent",
+  "description": "Intent-driven code completion engine",
+  "version": "1.0.0",
+  "publisher": "p",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "ntent-sidebar", "title": "Ntent History", "icon": "$(history)" }
+      ]
+    },
+    "views": {
+      "ntent-sidebar": [
+        { "id": "ntentHistoryView", "name": "Generation History" }
+      ]
+    },
+    "commands": [
+      { "command": "ntent.scaffold", "title": "Ntent: Scaffold Intent" },
+      { "command": "ntent.extractToOOP", "title": "Ntent: Extract to OOP Class" },
+      { "command": "ntent.diagnoseTerminal", "title": "Ntent: Diagnose Copied Terminal Error" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "command": "ntent.extractToOOP", "when": "editorHasSelection && resourceLangId == python", "group": "ntent@1" }
+      ]
+    },
+    "keybindings": [
+      { "command": "ntent.scaffold", "key": "shift+alt+n", "mac": "shift+alt+n", "when": "editorTextFocus" },
+      { "command": "ntent.extractToOOP", "key": "ctrl+alt+e", "mac": "cmd+alt+e", "when": "editorHasSelection && editorTextFocus" },
+      { "command": "ntent.diagnoseTerminal", "key": "ctrl+alt+d", "mac": "cmd+alt+d" }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "18.x",
+    "typescript": "^5.0.0"
+  }
+}
